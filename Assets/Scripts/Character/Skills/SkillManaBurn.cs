@@ -1,30 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SkillManaBurn : SkillBase
 {
-    protected float damage = 2;
+    [SerializeField] protected float minDamageFactor = 1f;
+    [SerializeField] protected float maxDamageFactor = 1.5f;
+    private GameObject selectedObject;
+    private CharacterTarget target;
 
-    public override void OnStartCast()
+    private void Start()
     {
-        isCasting = true;
-        characterStats.speed = 0;
+        this.enabled = false;
+        target = GetComponent<CharacterTarget>();
     }
 
-    private void Update()
+    [Command]
+    protected override bool CmdOnStartCast()
     {
-        if (!isCasting) this.enabled = false;
-
-        castTimer += Time.deltaTime;
-
-        if (castTimer > castTime) OnFinishCast();
+        selectedObject = target.selectedObject;
+        if (selectedObject == null) return false;
+        else return true;
     }
 
-    public override void OnFinishCast()
+    [Command]
+    protected override void CmdOnFinishCast()
     {
+        float damage = Random.Range(minDamageFactor, maxDamageFactor) * characterStats.AttackStrength;
         GameObject selectedObject = GetComponent<CharacterTarget>().selectedObject;
         selectedObject.GetComponent<CharacterStats>().TakeDamage(damage);
-        isCasting = false;
     }
 }

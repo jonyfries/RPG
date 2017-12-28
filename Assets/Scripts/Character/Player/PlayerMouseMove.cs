@@ -7,7 +7,7 @@ public class PlayerMouseMove : NetworkBehaviour
 {
     public float followDistance;
 
-    private float speed;
+    [SerializeField] private CharacterStats characterStats;
     private Vector3 targetPosition;
     private Transform targetObject = null;
     private bool isMoving = false;
@@ -15,7 +15,6 @@ public class PlayerMouseMove : NetworkBehaviour
     private void Start()
     {
         if (!isLocalPlayer) Destroy(this);
-        speed = GetComponent<CharacterStats>().speed;
     }
 
     private void Update()
@@ -53,14 +52,14 @@ public class PlayerMouseMove : NetworkBehaviour
 
         transform.LookAt(targetPosition);
 
-        if ((transform.position - targetPosition).magnitude < speed * Time.deltaTime)
+        if ((transform.position - targetPosition).magnitude < characterStats.Speed * Time.deltaTime)
         {
             transform.position = targetPosition;
             isMoving = false;
         }
         else
         {
-            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.position += transform.forward * characterStats.Speed * Time.deltaTime;
         }
     }
 }

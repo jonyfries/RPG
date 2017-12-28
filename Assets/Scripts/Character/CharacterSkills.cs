@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterSkills : MonoBehaviour
+public class CharacterSkills : NetworkBehaviour
 {
     public CharacterTarget target;
     public CharacterStats stats;
+    public UIHandles uiHandle;
 
-    public void Attack()
+    // *** Skills Character has Equiped *** //
+    public SkillBase skill1;
+    public SkillBase skill2;
+
+    private void Start()
     {
-        GameObject selectedObject = target.selectedObject;
-        if (selectedObject == null)
+        if (isLocalPlayer)
         {
-            return;
+            uiHandle = GameObject.Find("Canvas").GetComponent<UIHandles>();
+            uiHandle.button1.onClick.AddListener(delegate () { skill1.CmdStartCast(); });
         }
-
-        CharacterStats targetStats = selectedObject.GetComponent<CharacterStats>();
-        targetStats.TakeDamage(stats.attackStrength);
     }
 }

@@ -26,13 +26,14 @@ GameObject:
   - component: {fileID: 114603514919873496}
   - component: {fileID: 114663282929937320}
   - component: {fileID: 114464367642027514}
-  - component: {fileID: 114518611973432074}
+  - component: {fileID: 114334099367559586}
   - component: {fileID: 114078043656830600}
   - component: {fileID: 114059868723834462}
-  - component: {fileID: 114334099367559586}
+  - component: {fileID: 114518611973432074}
   - component: {fileID: 114392113517894148}
   - component: {fileID: 114879549505650192}
-  - component: {fileID: 114244822136770462}
+  - component: {fileID: 114005554015724830}
+  - component: {fileID: 114278369130473874}
   m_Layer: 0
   m_Name: CapsulePlayer
   m_TagString: Untagged
@@ -80,7 +81,7 @@ Transform:
   m_GameObject: {fileID: 1437258896508000}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6099999, z: 0.147}
-  m_LocalScale: {x: 0.7567967, y: 0.22655995, z: 0.6635249}
+  m_LocalScale: {x: 0.90145737, y: 0.25152624, z: 0.6635249}
   m_Children: []
   m_Father: {fileID: 4840282405303238}
   m_RootOrder: 0
@@ -105,7 +106,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1153962270121694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.158493, y: 0.924, z: -5.5960627}
+  m_LocalPosition: {x: 12.837873, y: 1, z: 3.7549913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4098097773610914}
@@ -161,7 +162,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 650e8b61fe94bf840a2e127e07c43abd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -210,6 +211,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &114005554015724830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153962270121694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39f4440572c46714d9dd0b403919c4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterStats: {fileID: 114518611973432074}
+  targetType: 2
+  range: 10
+  castTime: 0.5
+  deltaSpeedWhileCasting: 1000
+  skillVisual: {fileID: 114278369130473874}
+  minDamageFactor: 1
+  maxDamageFactor: 1.5
 --- !u!114 &114059868723834462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46ba9623710b0da4faa29a16ca3c8805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterStats: {fileID: 114518611973432074}
 --- !u!114 &114078043656830600
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -233,7 +254,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followDistance: 5
---- !u!114 &114244822136770462
+  characterStats: {fileID: 114518611973432074}
+--- !u!114 &114278369130473874
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -241,10 +263,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1153962270121694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a2512bc8aa758f40aa036861cca99d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f22ef87ddf7ae645933e3b6799a08d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterSkills: {fileID: 114879549505650192}
+  glasses: {fileID: 1437258896508000}
+  attackMaterial: {fileID: 2100000, guid: 89a24c75f926b4f45b4ce8123f38c2c1, type: 2}
+  baseMaterial: {fileID: 2100000, guid: 650e8b61fe94bf840a2e127e07c43abd, type: 2}
 --- !u!114 &114334099367559586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,13 +317,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc7f65ec975ebf24a8361ae8e034f494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  health: 20
-  damageTaken: 0
-  attackStrength: 2
-  baseSpeed: 0
-  baseHealth: 0
-  baseAttackStrength: 0
+  currentSpeed: 0
+  currentHealth: 0
+  currentDamageTaken: 0
+  currentAttackStrength: 0
+  baseSpeed: 5
+  baseHealth: 10
+  baseAttackStrength: 1
 --- !u!114 &114603514919873496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,6 +390,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 114392113517894148}
   stats: {fileID: 114518611973432074}
+  uiHandle: {fileID: 0}
+  skill1: {fileID: 114005554015724830}
+  skill2: {fileID: 0}
 --- !u!136 &136085482763415268
 CapsuleCollider:
   m_ObjectHideFlags: 1
