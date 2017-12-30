@@ -33,10 +33,11 @@ public class PlayerMouseMove : NetworkBehaviour
         targetObject = null;
     }
 
-    public void SetMove(Transform followTarget)
+    public void SetMove(Transform followTarget, float distance)
     {
         targetObject = followTarget;
         isMoving = true;
+        followDistance = distance;
     }
 
     private void MovePlayer()
@@ -45,7 +46,8 @@ public class PlayerMouseMove : NetworkBehaviour
             targetPosition = targetObject.position;
             if ((targetPosition - transform.position).magnitude < followDistance)
             {
-                //transform.position = Vector3.Lerp(transform.position, targetPosition, 19f);
+                targetObject = null;
+                isMoving = false;
                 return;
             }
         }

@@ -7,21 +7,16 @@ public class SkillManaBurn : SkillBase
 {
     [SerializeField] protected float minDamageFactor = 1f;
     [SerializeField] protected float maxDamageFactor = 1.5f;
-    private GameObject selectedObject;
-    private CharacterTarget target;
-
-    private void Start()
-    {
-        this.enabled = false;
-        target = GetComponent<CharacterTarget>();
-    }
 
     [Command]
     protected override void CmdOnStartCast()
     {
         selectedObject = target.selectedObject;
-        if (selectedObject == null) hasValidTarget = false;
-        else hasValidTarget = true;
+        if (selectedObject == null) {
+            hasValidTarget = false;
+        } else {
+            hasValidTarget = true;
+        }
     }
 
     [Command]

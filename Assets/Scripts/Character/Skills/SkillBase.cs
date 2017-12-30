@@ -20,14 +20,22 @@ public abstract class SkillBase : NetworkBehaviour
     [SerializeField] protected float castTime;
     [SerializeField] protected float deltaSpeedWhileCasting;
     [SerializeField] protected SkillVisualBase skillVisual;
-    [SerializeField] protected bool hasValidTarget;
-    //enchantment -- what effect is applied to the target
+    [SerializeField] protected CharacterTarget target;
 
-protected float castTimer;
+    protected GameObject selectedObject;
+    protected bool hasValidTarget;
+    private bool isCasting;
+
+    protected float castTimer;
 
     protected abstract void CmdOnStartCast();
     protected abstract void CmdOnFinishCast();
 
+    private void Start()
+    {
+        this.enabled = false;
+        target = GetComponent<CharacterTarget>();
+    }
 
     [Command]
     public void CmdStartCast()
@@ -36,20 +44,41 @@ protected float castTimer;
 
         CmdOnStartCast();
 
-        if (hasValidTarget)
-        {
-            this.enabled = true;
-            characterStats.ModifySpeed(-deltaSpeedWhileCasting);
-            skillVisual.StartSkillCast();
+        if (!hasValidTarget) return; // If the skill doesn't have a valid target return;
+
+        this.enabled = true;
+        isCasting = false;
+
+        Vector3 targetVector = transform.position - selectedObject.transform.position;
+        if (targetVector.magnitude > range) {
+            GetComponent<PlayerMouseMove>().SetMove(selectedObject.transform, range);
+        } else {
+            StartCasting();
         }
+    }
+
+    private void StartCasting()
+    {
+        characterStats.ModifySpeed(-deltaSpeedWhileCasting);
+        skillVisual.StartSkillCast();
+        isCasting = true;
     }
 
     private void Update()
     {
+        if (!isCasting)
+        {
+            Vector3 targetVector = transform.position - selectedObject.transform.position;
+            if (targetVector.magnitude <= range) {
+                StartCasting();
+            } else {
+                return;
+            }
+        }
+
         castTimer += Time.deltaTime;
 
-        if (castTimer > castTime)
-        {
+        if (castTimer > castTime) {
             CmdFinishCast();
             castTimer = 0;
         }
