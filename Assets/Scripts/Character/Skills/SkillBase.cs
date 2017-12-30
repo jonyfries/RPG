@@ -32,7 +32,7 @@ protected float castTimer;
     [Command]
     public void CmdStartCast()
     {
-        if (this.enabled) return;
+        if (this.enabled) return; //If the skill is already being used exit.
 
         CmdOnStartCast();
 

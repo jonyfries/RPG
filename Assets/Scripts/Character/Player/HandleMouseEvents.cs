@@ -36,7 +36,6 @@ public class HandleMouseEvents : NetworkBehaviour
             if (hit.transform.tag == "GameCharacter")
             {
                 target.selectedObject = hit.transform.gameObject;
-                mouseMove.SetMove(target.selectedObject.transform);
             }
             //If the object is Navigatable then move to where was clicked
             else if (hit.transform.tag == "Navigable" && mouseMove != null)
