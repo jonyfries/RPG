@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 114122093879293614}
   - component: {fileID: 114624285314823038}
   - component: {fileID: 114451376522445712}
-  - component: {fileID: 114173640694572764}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: GameCharacter
@@ -237,18 +236,6 @@ MonoBehaviour:
     i15: 144
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114173640694572764
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1374955120950880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e697e11e4006b0547ad2e938a212b8d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnPrefab: {fileID: 1374955120950880}
 --- !u!114 &114398595004262118
 MonoBehaviour:
   m_ObjectHideFlags: 1

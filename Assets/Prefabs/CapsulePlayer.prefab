@@ -225,7 +225,7 @@ MonoBehaviour:
   characterStats: {fileID: 114518611973432074}
   targetType: 2
   range: 10
-  castTime: 0.5
+  castTime: 1
   deltaSpeedWhileCasting: 1000
   skillVisual: {fileID: 114278369130473874}
   hasValidTarget: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   currentAttackStrength: 0
   baseSpeed: 5
   baseHealth: 10
-  baseAttackStrength: 10
+  baseAttackStrength: 1
 --- !u!114 &114603514919873496
 MonoBehaviour:
   m_ObjectHideFlags: 1

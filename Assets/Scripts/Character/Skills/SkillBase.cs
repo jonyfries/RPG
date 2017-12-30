@@ -32,6 +32,8 @@ protected float castTimer;
     [Command]
     public void CmdStartCast()
     {
+        if (this.enabled) return;
+
         CmdOnStartCast();
 
         if (hasValidTarget)
