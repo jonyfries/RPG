@@ -41,9 +41,9 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] private float currentDamageTaken;
     [SerializeField] private float currentAttackStrength;
 
-    [SerializeField] private float baseSpeed;
-    [SerializeField] private float baseHealth;
-    [SerializeField] private float baseAttackStrength;
+    [SerializeField] private float baseSpeed = 0;
+    [SerializeField] private float baseHealth = 0;
+    [SerializeField] private float baseAttackStrength = 0;
 
     private void Start()
     {
@@ -61,6 +61,9 @@ public class CharacterStats : MonoBehaviour
     public void TakeDamage(float attackStrength)
     {
         currentDamageTaken += attackStrength;
-        if (currentDamageTaken > currentHealth) Destroy(gameObject);
+        if (currentDamageTaken > currentHealth)
+        {
+            Destroy(gameObject);
+        }
     }
 }

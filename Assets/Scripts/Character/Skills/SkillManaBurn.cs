@@ -17,11 +17,11 @@ public class SkillManaBurn : SkillBase
     }
 
     [Command]
-    protected override bool CmdOnStartCast()
+    protected override void CmdOnStartCast()
     {
         selectedObject = target.selectedObject;
-        if (selectedObject == null) return false;
-        else return true;
+        if (selectedObject == null) hasValidTarget = false;
+        else hasValidTarget = true;
     }
 
     [Command]

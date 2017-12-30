@@ -20,18 +20,21 @@ public abstract class SkillBase : NetworkBehaviour
     [SerializeField] protected float castTime;
     [SerializeField] protected float deltaSpeedWhileCasting;
     [SerializeField] protected SkillVisualBase skillVisual;
+    [SerializeField] protected bool hasValidTarget;
     //enchantment -- what effect is applied to the target
 
 protected float castTimer;
 
-    protected abstract bool CmdOnStartCast();
+    protected abstract void CmdOnStartCast();
     protected abstract void CmdOnFinishCast();
 
 
     [Command]
     public void CmdStartCast()
     {
-        if (CmdOnStartCast())
+        CmdOnStartCast();
+
+        if (hasValidTarget)
         {
             this.enabled = true;
             characterStats.ModifySpeed(-deltaSpeedWhileCasting);
